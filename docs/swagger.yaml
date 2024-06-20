@@ -17,6 +17,8 @@ definitions:
         type: string
       password:
         type: string
+      role:
+        type: string
       username:
         type: string
     required:
@@ -24,6 +26,7 @@ definitions:
     - first_name
     - last_name
     - password
+    - role
     - username
     type: object
 host: localhost:8080
@@ -33,7 +36,7 @@ info:
     name: API Support
     url: http://www.swagger.io/support
   description: API for awesome project
-  title: Awesome API
+  title: Awesome API Happy coding!!!
   version: "1.0"
 paths:
   /signin:
@@ -72,6 +75,76 @@ paths:
       responses:
         "201":
           description: Created
+      tags:
+      - users
+  /user/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      tags:
+      - users
+    get:
+      consumes:
+      - application/json
+      description: Get a user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: Update a user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Sign up input
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.SignUpInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      tags:
+      - users
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Get all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
       tags:
       - users
 swagger: "2.0"

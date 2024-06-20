@@ -5,7 +5,7 @@ import (
 	"awesomeProject1/routers"
 )
 
-// @title Awesome API
+// @title Awesome API Happy coding!!!
 // @version 1.0
 // @description API for awesome project
 // @contact.name API Support

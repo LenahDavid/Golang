@@ -11,23 +11,12 @@ import (
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
 
-	// @Summary Create a new user
-	// @Description Create a new user
-	// @Tags users
-	// @Accept  json
-	// @Produce  json
-	// @Success 201 {object} User
-	// @Router /signup [post]
 	router.POST("/signup", controllers.SignUp)
-
-	// @Summary Sign in a user
-	// @Description Sign in a user
-	// @Tags users
-	// @Accept  json
-	// @Produce  json
-	// @Success 200 {object} User
-	// @Router /signin [post]
 	router.POST("/signin", controllers.SignIn)
+	router.GET("/users", controllers.GetUsers)
+	router.GET("/user/:id", controllers.GetUser)
+	router.PUT("/user/:id", controllers.UpdateUser)
+	router.DELETE("/user/:id", controllers.DeleteUser)
 
 	// Swagger documentation route
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

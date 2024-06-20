@@ -8,7 +8,7 @@ import (
 	"log"
 )
 
-var connectionString = "host=localhost port=5432 user=postgres password=postgres dbname=godatabse sslmode=disable TimeZone=UTC"
+var connectionString = "host=localhost port=5432 user=postgres password=password dbname=go sslmode=disable TimeZone=UTC"
 
 var DB *gorm.DB
 
@@ -37,7 +37,14 @@ func Connect() {
 }
 
 func Migrate() {
-	err := DB.AutoMigrate(&models.User{})
+	err := DB.AutoMigrate(&models.User{}, &models.Role{})
+	roles := []models.Role{
+		{Role: "admin"},
+		{Role: "user"},
+	}
+	for _, role := range roles {
+		DB.FirstOrCreate(&role, models.Role{Role: role.Role})
+	}
 	if err != nil {
 		log.Fatalf("Failed to migrate database: %v", err)
 	}
